@@ -6,8 +6,10 @@ import (
 
 	"github.com/gorilla/mux"
 )
- 
-func Createpost(w http.ResponseWriter, r *http.Request) {
+
+//------------------- POST ROUTES
+
+func CreatePost(w http.ResponseWriter, r *http.Request) {
  
     w.Header().Set("Content-Type", "application/json")
     var post Post
@@ -17,14 +19,14 @@ func Createpost(w http.ResponseWriter, r *http.Request) {
  
 }
  
-func Getposts(w http.ResponseWriter, r *http.Request) {
+func GetPosts(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     var posts  []Post
     Database.Find(&posts)
     json.NewEncoder(w).Encode(posts)
 }
  
-func GetpostById(w http.ResponseWriter, r *http.Request) {
+func GetPostById(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     var post  Post
     Database.First(&post, mux.Vars(r)["eid"])
@@ -32,7 +34,7 @@ func GetpostById(w http.ResponseWriter, r *http.Request) {
 }
  
  
-func Updatepost(w http.ResponseWriter, r *http.Request) {
+func UpdatePost(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     var post  Post
     Database.First(&post, mux.Vars(r)["eid"])
@@ -42,7 +44,7 @@ func Updatepost(w http.ResponseWriter, r *http.Request) {
 }
  
  
-func Deletepost(w http.ResponseWriter, r *http.Request) {
+func DeletePost(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     var post  Post
     Database.Delete(&post, mux.Vars(r)["eid"])

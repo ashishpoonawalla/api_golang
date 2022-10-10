@@ -6,7 +6,9 @@ import (
 
 	"github.com/gorilla/mux"
 )
- 
+
+//---------------- USER ROUTES
+
 func CreateUser(w http.ResponseWriter, r *http.Request) {
  
     w.Header().Set("Content-Type", "application/json")
@@ -19,9 +21,9 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
  
 func GetUsers(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
-    var Users  []User
-    Database.Find(&Users)
-    json.NewEncoder(w).Encode(Users)
+    var users  []User
+    Database.Find(&users)
+    json.NewEncoder(w).Encode(users)
 }
  
 func GetUserById(w http.ResponseWriter, r *http.Request) {
@@ -30,8 +32,7 @@ func GetUserById(w http.ResponseWriter, r *http.Request) {
     Database.First(&user, mux.Vars(r)["eid"])
     json.NewEncoder(w).Encode(user)
 }
- 
- 
+  
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
     var user  User
@@ -40,7 +41,6 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
     Database.Save(&user)
     json.NewEncoder(w).Encode(user)
 }
- 
  
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Content-Type", "application/json")
